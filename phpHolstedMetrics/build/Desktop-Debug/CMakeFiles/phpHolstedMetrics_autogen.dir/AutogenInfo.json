@@ -83,6 +83,12 @@
 	"HEADERS" : 
 	[
 		[
+			"/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/displayer.h",
+			"MU",
+			"EWIEGA46WW/moc_displayer.cpp",
+			null
+		],
+		[
 			"/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/mainwindow.h",
 			"MU",
 			"EWIEGA46WW/moc_mainwindow.cpp",
@@ -152,6 +158,11 @@
 	"SETTINGS_FILE" : "/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/phpHolstedMetrics_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/displayer.cpp",
+			"MU",
+			null
+		],
 		[
 			"/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/main.cpp",
 			"MU",

@@ -200,6 +200,30 @@ phpHolstedMetrics_autogen/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/phpHolstedMetrics_autogen.dir/build.make CMakeFiles/phpHolstedMetrics_autogen.dir/build
 .PHONY : phpHolstedMetrics_autogen/fast
 
+displayer.o: displayer.cpp.o
+.PHONY : displayer.o
+
+# target to build an object file
+displayer.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/phpHolstedMetrics.dir/build.make CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.o
+.PHONY : displayer.cpp.o
+
+displayer.i: displayer.cpp.i
+.PHONY : displayer.i
+
+# target to preprocess a source file
+displayer.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/phpHolstedMetrics.dir/build.make CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.i
+.PHONY : displayer.cpp.i
+
+displayer.s: displayer.cpp.s
+.PHONY : displayer.s
+
+# target to generate assembly for a file
+displayer.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/phpHolstedMetrics.dir/build.make CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.s
+.PHONY : displayer.cpp.s
+
 main.o: main.cpp.o
 .PHONY : main.o
 
@@ -335,6 +359,9 @@ help:
 	@echo "... phpHolstedMetrics_autogen"
 	@echo "... phpHolstedMetrics_autogen_timestamp_deps"
 	@echo "... phpHolstedMetrics"
+	@echo "... displayer.o"
+	@echo "... displayer.i"
+	@echo "... displayer.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

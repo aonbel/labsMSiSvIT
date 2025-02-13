@@ -7,6 +7,7 @@ phpHolstedMetrics: \
   CMakeFiles/phpHolstedMetrics.dir/mainwindow.cpp.o \
   CMakeFiles/phpHolstedMetrics.dir/phpholstedoperatorparser.cpp.o \
   CMakeFiles/phpHolstedMetrics.dir/parse_file.cpp.o \
+  CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.o \
   /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13 \
   /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13 \
   /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13 \
@@ -37,7 +38,6 @@ phpHolstedMetrics: \
   /usr/lib/gcc/x86_64-linux-gnu/13/crtendS.o \
   /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o \
   /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13 \
-  /lib/x86_64-linux-gnu/libm.so.6 \
   /lib/i386-linux-gnu/libz.so.1 \
   /usr/lib/i386-linux-gnu/libz.so.1 \
   /lib/x86_64-linux-gnu/libz.so.1 \
@@ -124,6 +124,8 @@ CMakeFiles/phpHolstedMetrics.dir/phpholstedoperatorparser.cpp.o:
 
 CMakeFiles/phpHolstedMetrics.dir/parse_file.cpp.o:
 
+CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.o:
+
 /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13:
 
 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13:
@@ -183,8 +185,6 @@ CMakeFiles/phpHolstedMetrics.dir/parse_file.cpp.o:
 /usr/lib/gcc/x86_64-linux-gnu/13/../../../x86_64-linux-gnu/crtn.o:
 
 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13:
-
-/lib/x86_64-linux-gnu/libm.so.6:
 
 /lib/i386-linux-gnu/libz.so.1:
 

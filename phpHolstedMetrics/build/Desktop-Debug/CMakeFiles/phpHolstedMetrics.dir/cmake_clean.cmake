@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/phpHolstedMetrics_autogen.dir/AutogenUsed.txt"
   "CMakeFiles/phpHolstedMetrics_autogen.dir/ParseCache.txt"
   "phpHolstedMetrics_autogen"
+  "CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.o"
+  "CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.o.d"
   "CMakeFiles/phpHolstedMetrics.dir/main.cpp.o"
   "CMakeFiles/phpHolstedMetrics.dir/main.cpp.o.d"
   "CMakeFiles/phpHolstedMetrics.dir/mainwindow.cpp.o"

@@ -9,6 +9,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "" "phpHolstedMetrics_autogen/timestamp" "custom" "phpHolstedMetrics_autogen/deps"
+  "/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/displayer.cpp" "CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.o" "gcc" "CMakeFiles/phpHolstedMetrics.dir/displayer.cpp.o.d"
   "/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/main.cpp" "CMakeFiles/phpHolstedMetrics.dir/main.cpp.o" "gcc" "CMakeFiles/phpHolstedMetrics.dir/main.cpp.o.d"
   "/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/mainwindow.cpp" "CMakeFiles/phpHolstedMetrics.dir/mainwindow.cpp.o" "gcc" "CMakeFiles/phpHolstedMetrics.dir/mainwindow.cpp.o.d"
   "/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/parse_file.cpp" "CMakeFiles/phpHolstedMetrics.dir/parse_file.cpp.o" "gcc" "CMakeFiles/phpHolstedMetrics.dir/parse_file.cpp.o.d"
