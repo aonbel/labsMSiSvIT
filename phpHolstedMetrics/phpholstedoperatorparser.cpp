@@ -14,6 +14,53 @@ void PhpHolstedOperatorParser::AddOperator(std::string name)
     operatorsData[name]++;
 }
 
+bool PhpHolstedOperatorParser::TryFindAndParseBinaryOperator(std::string name)
+{
+    int rbal = 0, fbal = 0;
+
+    for (int i = 0;i + name.size() <= code.size();i++)
+    {
+        if (code.substr(i, name.size()) == name && rbal == 0 && fbal == 0)
+        {
+            this->AddOperator(name);
+
+            PhpHolstedOperatorParser parser;
+
+            parser.SetCode(code.substr(0, i));
+            parser.ParseCode();
+            this->AddDataFrom(parser);
+
+            parser.SetCode(code.substr(i + name.size()));
+            parser.ParseCode();
+            this->AddDataFrom(parser);
+
+            return true;
+        }
+
+        if (code[i] == '(')
+        {
+            rbal++;
+        }
+
+        if (code[i] == ')')
+        {
+            rbal--;
+        }
+
+        if (code[i] == '{')
+        {
+            fbal++;
+        }
+
+        if (code[i] == '}')
+        {
+            fbal--;
+        }
+    }
+
+    return false;
+}
+
 void PhpHolstedOperatorParser::SetCode(std::string code)
 {
     this->code = code;
@@ -39,112 +86,139 @@ void PhpHolstedOperatorParser::ParseCode()
 
     std::smatch match;
 
-    PhpHolstedOperatorParser next;
+
 
     qDebug() << QString::fromStdString(code) << '\n';
 
-    if (std::regex_match(code, match, std::regex(R"(^\{(.*)\}$)")))
+    // special constructions
+
+    if (TryFindAndParseBinaryOperator(";"))
     {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
+        return;
+    }
+
+    PhpHolstedOperatorParser parser;
+
+    if (regex_match(code, match, std::regex(R"(^\{(.*)\}$)")))
+    {
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
         AddOperator("{...}");
     }
-    else if (std::regex_match(code, match, std::regex(R"(^\((.*)\)$)")))
+    else if (regex_match(code, match, std::regex(R"(^\((.*)\)$)")))
     {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
         AddOperator("(...)");
     }
-    else if (std::regex_match(code, match, std::regex(R"(^(.*)(;)(.*)$)")))
+    else if (regex_match(code, match, std::regex(R"(echo\s*(.*))")))
     {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        next.SetCode(match[3]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        AddOperator(match[2]);
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        this->AddOperator("echo");
     }
-    else if (std::regex_match(code, match, std::regex(R"(^if\s*\((.*?)\)\s*(\{.*?\})\s*(elseif\s*\((.*?)\)\s*(\{.*?\})\s*)*(else\s*(\{.*?\}))?$)")))
+    else if (regex_match(code, match, std::regex(R"(while\s*\((.*?)\)\s*(\{.*?\}))")))
     {
-        size_t currPtr = 0;
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
 
-        this->AddOperator("if..elseif..else");
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
 
-        while (currPtr != match.size())
+        this->AddOperator("while");
+    }
+    else if (regex_match(code, match, std::regex(R"(for\s*\((.*?)\)\s*(\{.*?\}))")))
+    {
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        this->AddOperator("for");
+    }
+    else if (regex_match(code, match, std::regex(R"(^if\s*\((.*?)\)\s*(\{.*?\})\s*(.*))")))
+    {
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+        parser.SetCode(match[3]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        this->AddOperator("if");
+    }
+    else if (regex_match(code, match, std::regex(R"(^elseif\s*\((.*?)\)\s*(\{.*?\})\s*(.*))")))
+    {
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+        parser.SetCode(match[3]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        this->AddOperator("elseif");
+    }
+    else if (regex_match(code, match, std::regex(R"(^else\s*(\{.*?\}))")))
+    {
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        this->AddOperator("else");
+    }
+    else if (regex_match(code, match, std::regex(R"((\w*)\((.*?)\))")))
+    {
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        this->AddOperator(match[1].str() + "(..)");
+    }
+
+    // binary operators
+
+    std::vector<std::string> binaryOperatorsInOrder = {"=","+=","-=","*=","==","!=","===","!==","<>","<=>","<","<=",">",">=","+","-","*","/","%"};
+
+    for (const std::string& operatorName : binaryOperatorsInOrder)
+    {
+        if (TryFindAndParseBinaryOperator(operatorName))
         {
-            next.SetCode(match[currPtr + 1]);
-            next.ParseCode();
-            this->AddDataFrom(next);
-
-            if (currPtr + 3 <= match.size())
-            {
-                next.SetCode(match[currPtr + 2]);
-                next.ParseCode();
-                this->AddDataFrom(next);
-
-                currPtr += 3;
-            }
-            else
-            {
-                currPtr += 2;
-            }
+            return;
         }
     }
-    else if (regex_match(code, match, std::regex(R"(^(.*)(=|\+=|-=|\*=)(.*)$)")))
+
+    // unary operators
+
+    if (regex_match(code, match, std::regex(R"(^(.*)(--|\+\+)$)")))
     {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        next.SetCode(match[3]);
-        next.ParseCode();
-        this->AddDataFrom(next);
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
         AddOperator(match[2]);
     }
-    else if (regex_match(code, match, std::regex(R"(^(.*)(==|!=|===|!==|<>|<=>)(.*)$)")))
+    else if (regex_match(code, match, std::regex(R"(^(-|\+|--)(.*)$)")))
     {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        next.SetCode(match[3]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        AddOperator(match[2]);
-    }
-    else if (regex_match(code, match, std::regex(R"(^(.*)(\+|-)(.*)$)")))
-    {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        next.SetCode(match[3]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        AddOperator(match[2]);
-    }
-    else if (regex_match(code, match, std::regex(R"(^(.*)(\*|/|%)(.*)$)")))
-    {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        next.SetCode(match[3]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        AddOperator(match[2]);
-    }
-    else if (regex_match(code, match, std::regex(R"(^(.*)(--|\+\+)$)")))
-    {
-        next.SetCode(match[1]);
-        next.ParseCode();
-        this->AddDataFrom(next);
-        AddOperator(match[2]);
-    }
-    else if (regex_match(code, match, std::regex(R"(^(\x+|--)(.*)$)")))
-    {
-        next.SetCode(match[2]);
-        next.ParseCode();
-        this->AddDataFrom(next);
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
         AddOperator(match[1]);
     }
 }

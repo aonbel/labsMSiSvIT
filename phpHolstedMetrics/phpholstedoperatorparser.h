@@ -1,10 +1,11 @@
 #ifndef PHPHOLSTEDOPERATORPARSER_H
 #define PHPHOLSTEDOPERATORPARSER_H
 
-#include <regex>
 #include <QDebug>
 #include <string>
 #include <iostream>
+#include <regex>
+#include <vector>
 
 class PhpHolstedOperatorParser
 {
@@ -13,6 +14,7 @@ class PhpHolstedOperatorParser
     std::map<std::string, size_t> operatorsData;
     void AddOperand(std::string name);
     void AddOperator(std::string name);
+    bool TryFindAndParseBinaryOperator(std::string name);
     bool checkIfOperand();
 public:
     PhpHolstedOperatorParser();
