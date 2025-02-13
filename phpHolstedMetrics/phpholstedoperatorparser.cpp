@@ -68,9 +68,6 @@ void PhpHolstedOperatorParser::SetCode(std::string code)
 
 void PhpHolstedOperatorParser::ParseCode()
 {
-    operatorsData.clear();
-    operandsData.clear();
-
     code = std::regex_replace(code, std::regex(R"(^\s+|\s+$)"), "");
 
     if (code == "")
@@ -85,8 +82,6 @@ void PhpHolstedOperatorParser::ParseCode()
     }
 
     std::smatch match;
-
-
 
     qDebug() << QString::fromStdString(code) << '\n';
 
@@ -121,25 +116,33 @@ void PhpHolstedOperatorParser::ParseCode()
 
         this->AddOperator("echo");
     }
-    else if (regex_match(code, match, std::regex(R"(while\s*\((.*?)\)\s*(\{.*?\}))")))
+    else if (regex_match(code, match, std::regex(R"(while\s*\((.*?)\)\s*(\{.*?\})(.*))")))
     {
         parser.SetCode(match[1]);
         parser.ParseCode();
         this->AddDataFrom(parser);
 
         parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        parser.SetCode(match[3]);
         parser.ParseCode();
         this->AddDataFrom(parser);
 
         this->AddOperator("while");
     }
-    else if (regex_match(code, match, std::regex(R"(for\s*\((.*?)\)\s*(\{.*?\}))")))
+    else if (regex_match(code, match, std::regex(R"(for\s*\((.*?)\)\s*(\{.*?\})(.*))")))
     {
         parser.SetCode(match[1]);
         parser.ParseCode();
         this->AddDataFrom(parser);
 
         parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        parser.SetCode(match[3]);
         parser.ParseCode();
         this->AddDataFrom(parser);
 
@@ -173,7 +176,7 @@ void PhpHolstedOperatorParser::ParseCode()
 
         this->AddOperator("elseif");
     }
-    else if (regex_match(code, match, std::regex(R"(^else\s*(\{.*?\}))")))
+    else if (regex_match(code, match, std::regex(R"(^else\s*(\{.*?\})(.*))")))
     {
         parser.SetCode(match[1]);
         parser.ParseCode();

@@ -1,0 +1,4 @@
+# Hashes of file build rules.
+a713a5617b02feac6080322acd082edd CMakeFiles/phpHolstedMetrics_autogen
+a713a5617b02feac6080322acd082edd CMakeFiles/phpHolstedMetrics_autogen_timestamp_deps
+cbcb2ee088d7356d7cdd3c2796f713ff phpHolstedMetrics_autogen/timestamp
