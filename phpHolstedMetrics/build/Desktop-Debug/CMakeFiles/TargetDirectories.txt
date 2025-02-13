@@ -1,0 +1,9 @@
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/phpHolstedMetrics.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/edit_cache.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/rebuild_cache.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/list_install_components.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/install.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/install/local.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/install/strip.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/phpHolstedMetrics_autogen_timestamp_deps.dir
+/home/vlad/Desktop/Metrology/labsMSiSvIT/phpHolstedMetrics/build/Desktop-Debug/CMakeFiles/phpHolstedMetrics_autogen.dir

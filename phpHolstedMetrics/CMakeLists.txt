@@ -40,6 +40,7 @@ else()
     else()
         add_executable(phpHolstedMetrics
             ${PROJECT_SOURCES}
+            parse_file.h parse_file.cpp
         )
     endif()
 endif()
