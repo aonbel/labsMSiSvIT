@@ -68,6 +68,9 @@ void PhpHolstedOperatorParser::SetCode(std::string code)
 
 void PhpHolstedOperatorParser::ParseCode()
 {
+    operatorsData.clear();
+    operandsData.clear();
+
     code = std::regex_replace(code, std::regex(R"(^\s+|\s+$)"), "");
 
     if (code == "")
@@ -108,7 +111,7 @@ void PhpHolstedOperatorParser::ParseCode()
         this->AddDataFrom(parser);
         AddOperator("(...)");
     }
-    else if (regex_match(code, match, std::regex(R"(echo\s*(.*))")))
+    else if (regex_match(code, match, std::regex(R"(^echo\s*(.*)$)")))
     {
         parser.SetCode(match[1]);
         parser.ParseCode();
@@ -116,7 +119,7 @@ void PhpHolstedOperatorParser::ParseCode()
 
         this->AddOperator("echo");
     }
-    else if (regex_match(code, match, std::regex(R"(while\s*\((.*?)\)\s*(\{.*?\})(.*))")))
+    else if (regex_match(code, match, std::regex(R"(^while\s*\((.*?)\)\s*(\{.*?\})(.*))")))
     {
         parser.SetCode(match[1]);
         parser.ParseCode();
@@ -132,7 +135,7 @@ void PhpHolstedOperatorParser::ParseCode()
 
         this->AddOperator("while");
     }
-    else if (regex_match(code, match, std::regex(R"(for\s*\((.*?)\)\s*(\{.*?\})(.*))")))
+    else if (regex_match(code, match, std::regex(R"(^for\s*\((.*?)\)\s*(\{.*?\})(.*))")))
     {
         parser.SetCode(match[1]);
         parser.ParseCode();
@@ -198,7 +201,7 @@ void PhpHolstedOperatorParser::ParseCode()
 
     // binary operators
 
-    std::vector<std::string> binaryOperatorsInOrder = {"=","+=","-=","*=","==","!=","===","!==","<>","<=>","<","<=",">",">=","+","-","*","/","%"};
+    std::vector<std::string> binaryOperatorsInOrder = {";","=","+=","-=","*=","==","!=","===","!==","<>","<=>","<","<=",">",">=","+","-","*","/","%"};
 
     for (const std::string& operatorName : binaryOperatorsInOrder)
     {
@@ -223,6 +226,17 @@ void PhpHolstedOperatorParser::ParseCode()
         parser.ParseCode();
         this->AddDataFrom(parser);
         AddOperator(match[1]);
+    }
+    else if (regex_match(code, match, std::regex(R"(^(.*)\[(.*)\]$)")))
+    {
+        parser.SetCode(match[1]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+        parser.SetCode(match[2]);
+        parser.ParseCode();
+        this->AddDataFrom(parser);
+
+        AddOperator("[...]");
     }
 }
 
