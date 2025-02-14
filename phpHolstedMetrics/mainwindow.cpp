@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
     Parse_file* fileParser = new Parse_file();
     PhpHolstedOperatorParser* codeParser = new PhpHolstedOperatorParser();
 
