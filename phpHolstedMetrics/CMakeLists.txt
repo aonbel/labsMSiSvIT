@@ -21,6 +21,8 @@ set(PROJECT_SOURCES
         phpholstedoperatorparser.cpp
         parse_file.h
         parse_file.cpp
+        displayer.h
+        displayer.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

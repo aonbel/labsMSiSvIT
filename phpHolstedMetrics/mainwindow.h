@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "phpholstedoperatorparser.h"
 #include "parse_file.h"
+#include "displayer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
