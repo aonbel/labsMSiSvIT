@@ -201,7 +201,7 @@ void PhpHolstedOperatorParser::ParseCode()
 
     // binary operators
 
-    std::vector<std::string> binaryOperatorsInOrder = {";","=","+=","-=","*=","==","!=","===","!==","<>","<=>","<","<=",">",">=","+","-","*","/","%"};
+    std::vector<std::string> binaryOperatorsInOrder = {";",",","=","+=","-=","*=","==","!=","===","!==","<>","<=>","<","<=",">",">=","+","-","*","/","%"};
 
     for (const std::string& operatorName : binaryOperatorsInOrder)
     {
