@@ -9,7 +9,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-
     Displayer* displayer = new Displayer(ui);
 
     Parse_file* fileParser = new Parse_file();
