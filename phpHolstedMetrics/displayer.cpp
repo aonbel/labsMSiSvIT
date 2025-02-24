@@ -4,17 +4,9 @@
 
 Displayer::Displayer() {}
 
-Displayer::Displayer(Ui::MainWindow *ui)
-{
-    this->ui = ui;
-}
+Displayer::Displayer(Ui::MainWindow *ui) : ui(ui) {}
 
-Displayer::Displayer(Ui::MainWindow *ui, std::map<std::string, size_t> operatorsMap, std::map<std::string, size_t> operandsMap)
-{
-    this->ui = ui;
-    this->operatorsMap = operatorsMap;
-    this->operandsMap = operandsMap;
-}
+Displayer::Displayer(Ui::MainWindow *ui, std::map<std::string, size_t> operatorsMap, std::map<std::string, size_t> operandsMap) : ui(ui), operatorsMap(operatorsMap), operandsMap(operandsMap) {}
 
 
 void Displayer::setOperatorsMap(const std::map<std::string, size_t> &operatorsMap)
@@ -34,6 +26,7 @@ void Displayer::displayOperators()
     ui->operatorsTable->horizontalHeader()->setStretchLastSection(true);
     ui->operatorsTable->setRowCount(operatorsMap.size());
     ui->operatorsTable->setColumnCount(2);
+    ui->operatorsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     int i = 0;
     std::map<std::string, size_t>::iterator ii;
@@ -52,6 +45,7 @@ void Displayer::displayOperands()
     ui->operandsTable->horizontalHeader()->setStretchLastSection(true);
     ui->operandsTable->setRowCount(operandsMap.size());
     ui->operandsTable->setColumnCount(2);
+    ui->operandsTable->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
 
     int i = 0;
     std::map<std::string, size_t>::iterator ii;

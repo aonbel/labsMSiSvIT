@@ -5,6 +5,8 @@
 #include <QTextBrowser>
 #include <math.h>
 
+#include <QVBoxLayout>
+
 class Displayer
 {
 private:
