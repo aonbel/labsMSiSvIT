@@ -17,6 +17,7 @@ class PhpHolstedOperatorParser
     bool TryFindAndParseBinaryOperator(std::string name);
     bool TryFindAndParseOperatorWithStructure(std::string structure, std::vector<std::string>& parts);
     bool checkIfOperand();
+    bool checkIfCharacterIsNaming(char character);
 public:
     PhpHolstedOperatorParser();
     explicit PhpHolstedOperatorParser(std::string code);

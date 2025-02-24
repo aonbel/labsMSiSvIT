@@ -68,6 +68,7 @@ bool PhpHolstedOperatorParser::TryFindAndParseOperatorWithStructure(std::string 
     size_t balance = 0;
     size_t structurePtr = 0;
     std::string currPart = "";
+    std::vector<std::string> autoParse;
 
     for (int i = 0;i<code.size();i++)
     {
@@ -86,6 +87,8 @@ bool PhpHolstedOperatorParser::TryFindAndParseOperatorWithStructure(std::string 
             if (structurePtr != structure.size() && code[i] == structure[structurePtr + 1])
             {
                 parts.push_back(currPart);
+
+                autoParse.push_back(currPart);
                 currPart = "";
                 structurePtr++;
             }
@@ -112,9 +115,9 @@ bool PhpHolstedOperatorParser::TryFindAndParseOperatorWithStructure(std::string 
 
         if (structure[structurePtr] == '\a')
         {
-            if ((structurePtr != structure.size() && code[i] == structure[structurePtr + 1]) || !std::isalpha(code[i]))
+            if ((structurePtr != structure.size() && code[i] == structure[structurePtr + 1]) || !checkIfCharacterIsNaming(code[i]))
             {
-                if (i == 0 || !std::isalpha(code[i-1]))
+                if (i == 0 || !checkIfCharacterIsNaming(code[i-1]))
                 {
                     return false;
                 }
@@ -153,6 +156,7 @@ bool PhpHolstedOperatorParser::TryFindAndParseOperatorWithStructure(std::string 
                 structurePtr++;
 
                 parts.push_back(currPart);
+                autoParse.push_back(currPart);
 
                 currPart = "";
             }
@@ -162,7 +166,7 @@ bool PhpHolstedOperatorParser::TryFindAndParseOperatorWithStructure(std::string 
             currPart = code[i];
             balance++;
         }
-        else if (code[i] == ' ')
+        else if (code[i] == ' ' || code[i] == '\t' || code[i] == '\n')
         {
             continue;
         }
@@ -176,16 +180,21 @@ bool PhpHolstedOperatorParser::TryFindAndParseOperatorWithStructure(std::string 
         }
     }
 
-    parts.push_back(currPart);
+    autoParse.push_back(currPart);
 
-    if (structurePtr + 1 != structure.size())
+    while (structurePtr < structure.size() && (structure[structurePtr] == '\r' || structure[structurePtr] == '\f'))
+    {
+        structurePtr++;
+    }
+
+    if (structurePtr != structure.size())
     {
         return false;
     }
 
     PhpHolstedOperatorParser parser;
 
-    for (const std::string& codePart : parts)
+    for (const std::string& codePart : autoParse)
     {
         parser.SetCode(codePart);
         parser.ParseCode();
@@ -212,12 +221,6 @@ void PhpHolstedOperatorParser::ParseCode()
         return;
     }
 
-    if (checkIfOperand())
-    {
-        AddOperand(this->code);
-        return;
-    }
-
     std::smatch match;
 
     qDebug() << QString::fromStdString(code) << '\n';
@@ -227,7 +230,10 @@ void PhpHolstedOperatorParser::ParseCode()
     PhpHolstedOperatorParser parser;
 
     std::vector<std::string> findInfo;
-
+    if (TryFindAndParseBinaryOperator(";"))
+    {
+        return;
+    }
     if (std::regex_match(code, match, std::regex(R"(^\((.*)\)$)")))
     {
         parser.SetCode(match[1]);
@@ -265,29 +271,35 @@ void PhpHolstedOperatorParser::ParseCode()
     }
     else if (TryFindAndParseOperatorWithStructure("if({\f", findInfo))
     {
-        AddOperator("if");
+        AddOperator("if..elseif..else");
         return;
     }
     else if (TryFindAndParseOperatorWithStructure("elseif({\f", findInfo))
     {
-        AddOperator("elseif");
         return;
     }
     else if (TryFindAndParseOperatorWithStructure("else{\f", findInfo))
     {
-        AddOperator("else");
         return;
     }
     else if (TryFindAndParseOperatorWithStructure("function\r{\f", findInfo))
     {
+        AddOperator("function");
         return;
     }
     else if (TryFindAndParseOperatorWithStructure("class\r{\f", findInfo))
     {
+        AddOperator("class");
         return;
     }
-    else if (TryFindAndParseOperatorWithStructure("\f[\f", findInfo))
+    else if (TryFindAndParseOperatorWithStructure("return\f", findInfo))
     {
+        AddOperator("return");
+        return;
+    }
+    else if (TryFindAndParseOperatorWithStructure("break\f", findInfo))
+    {
+        AddOperator("break");
         return;
     }
     else if (TryFindAndParseOperatorWithStructure("public\f", findInfo))
@@ -302,15 +314,16 @@ void PhpHolstedOperatorParser::ParseCode()
     }
     else if (TryFindAndParseOperatorWithStructure("\a(\f", findInfo))
     {
+        qDebug() << QString::fromStdString(findInfo[0]);
         AddOperator(findInfo[0] + "()");
         return;
     }
 
     // arithmetic and logical operators
 
-    std::vector<std::string> binaryOperatorsInOrder = {";",",",".","->","=","+=","-=","*=","||","&&","&","|","^","==","!=","===","!==","<>","<=>","<","<=",">",">=","++","--","+","-","*","/","%","new ","clone "};
+    std::vector<std::string> binaryOperatorsInOrder = {",",".","->","=","+=","-=","*=","||","&&","&","|","^","==","!=","===","!==","<>","<=>","<","<=",">",">=","++","--","+","-","*","/","%","new ","clone "};
 
-    std::sort(binaryOperatorsInOrder.begin(), binaryOperatorsInOrder.end(), [] (std::string a, std::string b) {return a.size() > b.size();});
+    std::stable_sort(binaryOperatorsInOrder.begin(), binaryOperatorsInOrder.end(), [] (std::string a, std::string b) {return a.size() > b.size();});
 
     for (const std::string& operatorName : binaryOperatorsInOrder)
     {
@@ -318,6 +331,14 @@ void PhpHolstedOperatorParser::ParseCode()
         {
             return;
         }
+    }
+
+    // operands
+
+    if (checkIfOperand())
+    {
+        AddOperand(this->code);
+        return;
     }
 }
 
@@ -346,5 +367,10 @@ void PhpHolstedOperatorParser::AddDataFrom(const PhpHolstedOperatorParser &other
 
 bool PhpHolstedOperatorParser::checkIfOperand()
 {
-    return std::regex_match(code, std::regex(R"(^(\$\w+|\d+(\.\d*)?(e\d+)?|'[^']*'|"[^"]*")$)"));
+    return std::regex_match(code, std::regex(R"(^((\w+)|(\$\w+)|(\d+(\.\d*)?(e\d+)?)|('[^']*'|"[^"]*"))$)"));
+}
+
+bool PhpHolstedOperatorParser::checkIfCharacterIsNaming(char character)
+{
+    return ((std::isalpha(character)) || character == '_');
 }
