@@ -286,11 +286,6 @@ void PhpHolstedOperatorParser::ParseCode()
     {
         return;
     }
-    else if (TryFindAndParseOperatorWithStructure("new\f", findInfo))
-    {
-        AddOperator("new");
-        return;
-    }
     else if (TryFindAndParseOperatorWithStructure("\f[\f", findInfo))
     {
         return;
@@ -313,7 +308,7 @@ void PhpHolstedOperatorParser::ParseCode()
 
     // arithmetic and logical operators
 
-    std::vector<std::string> binaryOperatorsInOrder = {";",",",".","->","=","+=","-=","*=","==","!=","===","!==","<>","<=>","<","<=",">",">=","++","--","+","-","*","/","%"};
+    std::vector<std::string> binaryOperatorsInOrder = {";",",",".","->","=","+=","-=","*=","||","&&","&","|","^","==","!=","===","!==","<>","<=>","<","<=",">",">=","++","--","+","-","*","/","%","new ","clone "};
 
     std::sort(binaryOperatorsInOrder.begin(), binaryOperatorsInOrder.end(), [] (std::string a, std::string b) {return a.size() > b.size();});
 
@@ -351,5 +346,5 @@ void PhpHolstedOperatorParser::AddDataFrom(const PhpHolstedOperatorParser &other
 
 bool PhpHolstedOperatorParser::checkIfOperand()
 {
-    return std::regex_match(code, std::regex(R"(^(\$\w+|\d+(\.\d*)?(e\d+)?|'.*'|".*")$)"));
+    return std::regex_match(code, std::regex(R"(^(\$\w+|\d+(\.\d*)?(e\d+)?|'[^']*'|"[^"]*")$)"));
 }
