@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+  <class>MainWindow</class>
+  <widget class="QMainWindow" name="MainWindow">
+    <property name="geometry">
+      <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>800</width>
+        <height>600</height>
+      </rect>
+    </property>
+    <property name="windowTitle">
+      <string>MainWindow</string>
+    </property>
+    <widget class="QWidget" name="centralwidget">
+      <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+        </sizepolicy>
+      </property>  
+      
+      <layout class="QVBoxLayout" name="verticalLayout">
+        <item>
+          <layout class="QVBoxLayout" name="Spen">
+            <item>
+              <widget class="QLabel" name="NameSpen">
+                <property name="text">
+                  <string>Spen</string>
+                </property>
+                <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <widget class="QTableWidget" name="SpenTable">
+                <property name="sizePolicy">
+                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <horstretch>1</horstretch>
+                    <verstretch>1</verstretch>
+                  </sizepolicy>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <widget class="QLabel" name="SpenResult">
+                <property name="text">
+                  <string>TextLabel</string>
+                </property>
+              </widget>
+            </item>
+          </layout>
+        </item>
+        
+        <item>
+          <layout class="QVBoxLayout" name="Chepin">
+            <item>
+              <widget class="QLabel" name="NameChepin">
+                <property name="text">
+                  <string>Chepin's metric</string>
+                </property>
+                <property name="alignment">
+                  <set>Qt::AlignCenter</set>
+                </property>
+              </widget>
+            </item>
+            <item>
+              <layout class="QHBoxLayout" name="horizontalLayout">
+                <!-- Добавляем stretch для равномерного распределения таблиц -->
+                <item>
+                  <widget class="QTableWidget" name="PTable">
+                    <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="QTableWidget" name="MTable">
+                    <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="QTableWidget" name="CTable">
+                    <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
+                    </property>
+                  </widget>
+                </item>
+                <item>
+                  <widget class="QTableWidget" name="TTable">
+                    <property name="sizePolicy">
+                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
+                    </property>
+                  </widget>
+                </item>
+              </layout>
+            </item>
+            <item>
+              <widget class="QLabel" name="ResultChepin">
+                <property name="text">
+                  <string>TextLabel</string>
+                </property>
+              </widget>
+            </item>
+          </layout>
+        </item>
+      </layout>
+    </widget>
+  </widget>
+  <resources/>
+  <connections/>
+</ui>
