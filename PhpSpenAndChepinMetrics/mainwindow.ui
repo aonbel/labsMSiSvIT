@@ -1,169 +1,254 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-  <class>MainWindow</class>
-  <widget class="QMainWindow" name="MainWindow">
-    <property name="geometry">
-      <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>800</width>
-        <height>600</height>
-      </rect>
-    </property>
-    <property name="windowTitle">
-      <string>MainWindow</string>
-    </property>
-    <widget class="QWidget" name="centralwidget">
-      <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-        </sizepolicy>
-      </property>
-
-      <layout class="QVBoxLayout" name="verticalLayout">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1038</width>
+    <height>908</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="5,6,6">
+    <item>
+     <layout class="QVBoxLayout" name="Spen">
+      <item>
+       <widget class="QLabel" name="NameSpen">
+        <property name="text">
+         <string>Spen</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTableWidget" name="SpenTable">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>1</horstretch>
+          <verstretch>1</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="SpenResult">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="Chepin" stretch="1,20,1,1">
+      <item>
+       <widget class="QLabel" name="NameChepin">
+        <property name="text">
+         <string>Chepin's metric</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
-          <layout class="QVBoxLayout" name="Spen">
-            <item>
-              <widget class="QLabel" name="NameSpen">
-                <property name="text">
-                  <string>Spen</string>
-                </property>
-                <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                </property>
-              </widget>
-            </item>
-            <item>
-              <widget class="QTableWidget" name="SpenTable">
-                <property name="sizePolicy">
-                  <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-                    <horstretch>1</horstretch>
-                    <verstretch>1</verstretch>
-                  </sizepolicy>
-                </property>
-              </widget>
-            </item>
-            <item>
-              <widget class="QLabel" name="SpenResult">
-                <property name="text">
-                  <string>TextLabel</string>
-                </property>
-              </widget>
-            </item>
-          </layout>
+         <widget class="QTableWidget" name="PTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
-
         <item>
-          <layout class="QVBoxLayout" name="Chepin">
-            <item>
-              <widget class="QLabel" name="NameChepin">
-                <property name="text">
-                  <string>Chepin's metric</string>
-                </property>
-                <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                </property>
-              </widget>
-            </item>
-            <item>
-              <layout class="QHBoxLayout" name="horizontalLayout">
-                <item>
-                  <widget class="QTableWidget" name="PTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-                <item>
-                  <widget class="QTableWidget" name="MTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-                <item>
-                  <widget class="QTableWidget" name="CTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-                <item>
-                  <widget class="QTableWidget" name="TTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-              </layout>
-            </item>
-            <item>
-              <widget class="QLabel" name="ResultChepin">
-                <property name="text">
-                  <string>TextLabel</string>
-                </property>
-              </widget>
-            </item>
-          </layout>
+         <widget class="QTableWidget" name="MTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
-
         <item>
-          <layout class="QVBoxLayout" name="ChepinIO">
-            <item>
-              <widget class="QLabel" name="NameChepinIO">
-                <property name="text">
-                  <string>Chepin's metric IO</string>
-                </property>
-                <property name="alignment">
-                  <set>Qt::AlignCenter</set>
-                </property>
-              </widget>
-            </item>
-            <item>
-              <layout class="QHBoxLayout" name="horizontalLayout_IO">
-                <item>
-                  <widget class="QTableWidget" name="PIOTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-                <item>
-                  <widget class="QTableWidget" name="MIOTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-                <item>
-                  <widget class="QTableWidget" name="CIOTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-                <item>
-                  <widget class="QTableWidget" name="TIOTable">
-                    <property name="sizePolicy">
-                      <sizepolicy hsizetype="Expanding" vsizetype="Expanding"/>
-                    </property>
-                  </widget>
-                </item>
-              </layout>
-            </item>
-            <item>
-              <widget class="QLabel" name="ResultChepinIO">
-                <property name="text">
-                  <string>TextLabel</string>
-                </property>
-              </widget>
-            </item>
-          </layout>
+         <widget class="QTableWidget" name="CTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
-      </layout>
-    </widget>
+        <item>
+         <widget class="QTableWidget" name="TTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QLabel" name="PTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="MTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="CTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="TTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="ResultChepin">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <layout class="QVBoxLayout" name="ChepinIO" stretch="1,20,1,1">
+      <item>
+       <widget class="QLabel" name="NameChepinIO">
+        <property name="text">
+         <string>Chepin's metric IO</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_IO">
+        <item>
+         <widget class="QTableWidget" name="PIOTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="MIOTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="CIOTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="TIOTable">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <item>
+         <widget class="QLabel" name="PIOTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="MIOTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="CIOTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="TIOTotal">
+          <property name="text">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;TextLabel&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item>
+       <widget class="QLabel" name="ResultChepinIO">
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
-  <resources/>
-  <connections/>
+ </widget>
+ <resources/>
+ <connections/>
 </ui>

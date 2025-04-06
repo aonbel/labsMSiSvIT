@@ -155,6 +155,9 @@ bool PhpHolstedOperatorParser::TryFindAndParseOperatorWithStructure(std::string 
             {
                 structurePtr++;
 
+                currPart.erase(0, 1);
+                currPart.erase(currPart.size() - 1, 1);
+
                 parts.push_back(currPart);
                 autoParse.push_back(currPart);
 
