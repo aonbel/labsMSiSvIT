@@ -6,7 +6,7 @@
 
 inline bool checkIfValuable(std::string text)
 {
-    return text != "false" && text != "true" && std::regex_match(text, std::regex(R"(^(([a-zA-Z]+)|(\$[a-zA-Z]+))$)"));
+    return text != "false" && text != "true" && std::regex_match(text, std::regex(R"(^(([a-zA-Z_]+)|(\$[a-zA-Z_]+))$)"));
 }
 
 inline bool checkIfCharacterIsNaming(char character)
